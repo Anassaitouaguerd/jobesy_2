@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\apply_offre;
 use App\Models\aprouve_offer;
+use App\Controllers\email_controller;
 session_start();
 
 class aprouve_controller
@@ -38,9 +39,12 @@ class aprouve_controller
     {
         if(isset($_GET['id_offre']))
         {
+            $_SESSION['email'] = $_GET['user_email'];
+            $_SESSION['name'] = $_GET['user_name'];
+            $_SESSION['title_job'] = $_GET['job'];
+            $_SESSION['massage'] = "!!!!! Congratulations, your application for this position has been approved !!!!!!";
             $offre_id = $_GET['id_offre'];
             $job_id = $_GET['id_job'];
-            // $_SESSION['id_user'] = $_GET['id_user'];
                 $_SESSION['reponse'] = "accepted" ;
                 $status = "aprouve";
                 $status_job = "inactif";
@@ -48,19 +52,28 @@ class aprouve_controller
                 $change_status = $this->apply->change_status_job($job_id,$status_job);
                 if($aprouve && $change_status)
                 {
+                    $email = new email_controller();
+                    $email->send_email();
                     header('location: offre');
                 }
         }
     }
     public function reject_job()
     {
-        $offre_id = $_GET['id_offre'];
+            $_SESSION['email'] = $_GET['user_email'];
+            $_SESSION['name'] = $_GET['user_name'];
+            $_SESSION['title_job'] = $_GET['job'];
+            $_SESSION['massage'] = "!!!!! Unfortunately, your application for this position has been rejected !!!!!!";
             $_SESSION['reponse'] = "rejected";
+            $offre_id = $_GET['id_offre'];
             $status_job = "actif";
             $status = "inaprouve";
             $aprouve = $this->accept->change_status($offre_id,$status);
             $change_status = $this->apply->change_status_job($job_id,$status_job);
-            if($aprouve && $change_status){
+            if($aprouve && $change_status)
+            {
+                $email = new email_controller();
+                $email->send_email();
                 header('location: offre');
             } 
     }

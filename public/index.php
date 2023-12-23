@@ -115,9 +115,6 @@ if(array_key_exists($url,$route)){
     }else{
             $controller = new home_controller();
             $controller->page_notfound();
-    // http_response_code(404);
-    // header("HTTP/1.0 404 Not Found");
-    //  echo file_get_contents(JURI::root().'./error-404');
  exit;
 }
 die();

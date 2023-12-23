@@ -101,7 +101,7 @@
                                 <p class="fw-normal mb-1 f_title"><?= $rows["status"] ?>. </p>
                             </td>
                             <td class="d-flex">
-                                <a href="apply_accepted?id_offre=<?= $rows["id"]?>&id_job=<?= $rows["job_id"]?>&id_user=<?= $rows["id_user"]?>"
+                                <a href="apply_accepted?id_offre=<?= $rows["id"]?>&id_job=<?= $rows["job_id"]?>&user_email=<?= $rows["email"]?>&user_name=<?= $rows["username"] ?>&job=<?= $rows["title"]?>"
                                     class="w-50"><img class="accept_task" style="width: 85%;"
                                         src="assets/img/journal-check.svg" alt="icon"></a>
                                 <a href="apply_rejected?id_offre=<?= $rows["id"]?>&id_job=<?= $rows["job_id"]?>"
