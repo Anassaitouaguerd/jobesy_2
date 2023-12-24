@@ -42,7 +42,7 @@ class aprouve_controller
             $_SESSION['email'] = $_GET['user_email'];
             $_SESSION['name'] = $_GET['user_name'];
             $_SESSION['title_job'] = $_GET['job'];
-            $_SESSION['massage'] = "!!!!! Congratulations, your application for this position has been approved !!!!!!";
+            $_SESSION['message'] = "!!!!! Congratulations, your application for this position has been approved !!!!!!";
             $offre_id = $_GET['id_offre'];
             $job_id = $_GET['id_job'];
                 $_SESSION['reponse'] = "accepted" ;
@@ -54,6 +54,7 @@ class aprouve_controller
                 {
                     $email = new email_controller();
                     $email->send_email();
+                    
                     header('location: offre');
                 }
         }
@@ -63,7 +64,7 @@ class aprouve_controller
             $_SESSION['email'] = $_GET['user_email'];
             $_SESSION['name'] = $_GET['user_name'];
             $_SESSION['title_job'] = $_GET['job'];
-            $_SESSION['massage'] = "!!!!! Unfortunately, your application for this position has been rejected !!!!!!";
+            $_SESSION['message'] = "!!!!! Unfortunately, your application for this position has been rejected !!!!!!";
             $_SESSION['reponse'] = "rejected";
             $offre_id = $_GET['id_offre'];
             $status_job = "actif";
